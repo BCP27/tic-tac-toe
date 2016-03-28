@@ -85,8 +85,6 @@ public class GameBoard {
                 return true;
             }
         }
-        if (getOpenSquares().length == 0 )
-            return true;
         return false;
     }
 }
