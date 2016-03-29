@@ -1,5 +1,7 @@
 package edu.htc.tictactoe;
 
+import edu.htc.tictactoe.player.Player;
+
 import java.util.Scanner;
 
 public class TicTacToe {
