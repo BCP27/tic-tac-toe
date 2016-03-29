@@ -9,6 +9,23 @@ public class TicTacToe {
     Scanner scanner = new Scanner(System.in);
     Player player1 = new Player("Brian", 'X');
     Player player2 = new Player("Player2", 'O');
+    int b = 1;
+    public boolean newGame()
+    {
+        System.out.println("Would you like to play again, type, 'No?' to stop");
+        String response = scanner.next();
+        if (response.equals("No"))
+        {
+            b = 2;
+            return false;
+        }
+        else
+        {
+           char board[] = {'1','2','3','4','5','6','7','8','9'};
+            Game = new GameBoard((board));
+            return true;
+        }
+    }
     public void playerVictory(int playerNumber)
     {
         if (playerNumber == 1)
@@ -29,7 +46,6 @@ public class TicTacToe {
     }
   public void playGame()
   {
-      int turn = 0;
       System.out.println("Player 1 Name: " + player1.getName());
       System.out.println("Player 1 Marker: " + player1.getMarker());
       System.out.println("Player 1 Win Count: " + player1.getWinCount());
@@ -41,28 +57,29 @@ public class TicTacToe {
       {
           Game.display();
           System.out.println(player1.getName() + "'s turn, their marker is " + player1.getMarker());
-          turn = turn + 1;
           Game.updateSquare(player1.getMove(), 'X');
           if (Game.isGameWon())
           {
               playerVictory(1);
-              break;
+              if (!newGame())
+                  break;
           }
           if (Game.getOpenSquares().length == 0)
           {
               Game.display();
               System.out.println("Tie Game!");
-              break;
+              if (!newGame())
+                  break;
           }
           Game.display();
           System.out.println(player2.getName() + "'s turn, their marker is " + player2.getMarker());
-          turn = turn + 1;
           Game.updateSquare(player2.getMove(), 'O');
           if (Game.isGameWon())
           {
               Game.display();
               playerVictory(2);
-              break;
+              if (!newGame())
+                  break;
           }
           if (Game.getOpenSquares().length == 0)
           {
@@ -70,7 +87,8 @@ public class TicTacToe {
               System.out.println("Tie Game!");
               System.out.println(player1.getName() + ": " + player1.getWinCount());
               System.out.println(player2.getName() + ": " + player2.getWinCount());
-              break;
+              if (!newGame())
+                  break;
           }
       }
   }
